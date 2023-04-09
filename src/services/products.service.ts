@@ -50,7 +50,7 @@ export class ProductsService {
     return this.products[productIndex];
   }
 
-  delete(id: string) {
+  delete(id: number) {
     const product = this.products.find((item) => item.id === +id);
 
     if (!product) {
