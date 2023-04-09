@@ -35,17 +35,19 @@ export class ProductsService {
     return newProduct;
   }
 
-  update(id, payload) {
-    const productIndex = this.products.findIndex((item) => item.id === id);
+  update(id: string, payload) {
+    const product = this.findOne(+id);
+    const productIndex = this.products.findIndex((item) => item.id === +id);
     this.products[productIndex] = {
-      ...this.products[productIndex],
+      ...product,
       ...payload,
     };
+    return this.products[productIndex];
   }
 
-  delete(id) {
-    const productIndex = this.products.findIndex((item) => item.id === id);
-    productIndex > -1 && this.products.splice(productIndex, 1);
-    return productIndex;
+  delete(id: string) {
+    const productIndex = this.products.findIndex((item) => item.id === +id);
+    productIndex >= 0 && this.products.splice(productIndex, 1);
+    return { message: `was deleted product with id ${id}` };
   }
 }
