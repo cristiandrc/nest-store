@@ -14,6 +14,7 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from 'src/services/products.service';
 import { ParseIntTwoPipe } from 'src/common/parse-int/parse-int.pipe';
+import { createProductDto, updateProductDto } from 'src/dtos/products.dto';
 
 import { Response } from 'express';
 
@@ -48,7 +49,7 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: createProductDto) {
     return this.productService.create(payload);
     // return {
     //   message: 'Accion de crear',
@@ -57,7 +58,7 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
+  update(@Param('id') id: string, @Body() payload: updateProductDto) {
     return this.productService.update(id, payload);
   }
 
